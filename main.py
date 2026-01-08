@@ -26,14 +26,18 @@ class Admin(User):
 
     def list_exams(self):
         for exam in self.created_exams:
-            print(exam.title, ' | desc: ', exam.description, ' | duration: ', exam.duration)
+            print(exam.title,
+                  ' | Desc: ', exam.description,
+                  ' | Duration: ', exam.duration,
+                  ' | Questions: ', len(exam.questions),
+                  ' | Published: ', 'Yes' if exam.is_published() else 'No' )
 
 class Student(User):
     def __init__(self, name, email):
         super().__init__(name, email)
         self.taken_exams = []
 
-    def list_available_exams(self):
+    def list_available_exams(self, all_exams):
         pass
 
     def take_exam(self, exam):
