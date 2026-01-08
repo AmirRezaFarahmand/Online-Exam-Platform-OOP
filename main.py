@@ -148,16 +148,10 @@ class TFQ(Question):
     def set_correct_answer(self, correct_answer):
         self.correct_answer = self.to_bool(correct_answer)
 
-admin = Admin('Mahdiar', 'mahdiar@qut.ac.ir')
-exam1 = admin.create_exam('Goodbye 2025', 'Nahuy', 20)
-q1 = TFQ('نارنگی میقولی؟', 69)
-q1.set_correct_answer(True)
-q2 = TFQ('نارنگی نمیقولی؟', 85)
-q2.set_correct_answer(False)
-admin.add_question(exam1, q1)
-admin.add_question(exam1, q2)
-admin.list_exams()
-student = Student('Doctor', 'Doctor@anime.net')
-student.list_available_exams([exam1])
-student.take_exam(exam1)
-student.view_results()
+Admins = []
+Students = []
+Admins.append(Admin('Hashemi', 'Hashemi@gmail.com'))
+Admins.append(Admin('Mahdiar', 'Mahdiar@qut.ac.ir'))
+Students.append(Student('Doctor', 'Doctor@anime.net'))
+Students.append(Student('Arman', 'Arman@sut.ac.ir'))
+Students.append(Student('Mehrsa', 'Mehrsa@disneyland.com'))
