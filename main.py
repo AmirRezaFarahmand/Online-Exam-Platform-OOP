@@ -15,14 +15,18 @@ class Admin(User):
         super().__init__(name, email)
         self.created_exams = []
 
-    def create_exam(self, title, duration):
-        pass
+    def create_exam(self, title, description, duration):
+        new_exam = Exam(title, description, duration)
+        self.created_exams.append(new_exam)
+        new_exam.set_exam_id(len(self.created_exams))
+        return new_exam
 
-    def add_question(self, question):
-        pass
+    def add_question(self, exam, question):
+        exam.add_question(question)
 
     def list_exams(self):
-        pass
+        for exam in self.created_exams:
+            print(exam.title, ' | desc: ', exam.description, ' | duration: ', exam.duration)
 
 class Student(User):
     def __init__(self, name, email):
