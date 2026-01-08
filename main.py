@@ -37,3 +37,19 @@ class Student(User):
 
     def view_results(self):
         pass
+
+
+class Exam:
+    def __init__(self, title, description, duration):
+        self.exam_id = 0
+        self.title = title
+        self.description = description
+        self.duration = duration
+        self.is_published = False
+
+    def add_question(self, question):
+        pass
+
+    def conduct_exam(self, student):
+        pass
+
