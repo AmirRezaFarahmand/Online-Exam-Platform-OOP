@@ -8,7 +8,7 @@ class User:
         self.user_id = last_user_id + 1
 
     def display_info(self):
-        print('name: ', self.name, ', email: ', self.email)
+        print('name:', self.name, ', email:', self.email)
 
 class Admin(User):
     def __init__(self, name, email):
@@ -27,10 +27,10 @@ class Admin(User):
     def list_exams(self):
         for exam in self.created_exams:
             print(exam.title,
-                  ' | Desc: ', exam.description,
-                  ' | Duration: ', exam.duration,
-                  ' | Questions: ', len(exam.questions),
-                  ' | Published: ', 'Yes' if exam.is_published else 'No' )
+                  '| Desc:', exam.description,
+                  '| Duration:', exam.duration,
+                  '| Questions:', len(exam.questions),
+                  '| Published:', 'Yes' if exam.is_published else 'No' )
 
 class Student(User):
     def __init__(self, name, email):
@@ -39,15 +39,15 @@ class Student(User):
 
     def list_available_exams(self, all_exams):
         for exam in all_exams:
-            if exam.is_published():
+            if exam.is_published:
                 print(exam.title,
-                      ' | Desc: ', exam.description,
-                      ' | Duration: ', exam.duration,
-                      ' | Questions: ', len(exam.questions),
-                      ' | Score: ', self.taken_exams[exam] if exam in self.taken_exams else 'Not taken' )
+                      '| Desc:', exam.description,
+                      '| Duration:', exam.duration,
+                      '| Questions:', len(exam.questions),
+                      '| Score:', self.taken_exams[exam] if exam in self.taken_exams else 'Not taken' )
 
     def take_exam(self, exam):
-        print(exam.title, ' | Duration: ' , exam.duration, " , Good luck!")
+        print(exam.title, '| Duration:' , exam.duration, " , Good luck!")
         correct_answers = 0
         total_points = 0
         for question in exam.questions:
@@ -58,13 +58,13 @@ class Student(User):
                 correct_answers += question.points
         final_score = correct_answers / total_points
         self.taken_exams[exam] = final_score
-        print('Your final score is: ', final_score)
+        print('Your final score is:', final_score)
 
 
     def view_results(self):
-        for exam, score in self.taken_exams:
+        for exam in self.taken_exams:
             print(exam.title,
-                  ' | Score: ', score)
+                  '| Score:', self.taken_exams[exam])
 
 class Exam:
     def __init__(self, title, description, duration):
@@ -130,9 +130,10 @@ class TFQ(Question):
         print(self.question_text, " (True/False)")
 
     def to_bool(self, answer):
-        if answer == "T" or answer == "t" \
-                or answer == "true" or answer == "True" \
-                or int(answer) == 1:
+        answer = str(answer).lower()
+        if answer == 't' or answer == 'yes'\
+            or answer == 'true' \
+            or answer == '1':
             return True
         return False
 
@@ -151,3 +152,7 @@ q2.set_correct_answer(False)
 admin.add_question(exam1, q1)
 admin.add_question(exam1, q2)
 admin.list_exams()
+student = Student('Doctor', 'Doctor@anime.net')
+student.list_available_exams([exam1])
+student.take_exam(exam1)
+student.view_results()
