@@ -46,6 +46,11 @@ class Student(User):
                       '| Questions:', len(exam.questions),
                       '| Score:', self.taken_exams[exam] if exam in self.taken_exams else 'Not taken' )
 
+    def format_score(self, score):
+        integers = int(score)
+        doubles = score - float(integers)
+        return str(integers) + '.' + str(doubles)[2]
+
     def take_exam(self, exam):
         print(exam.title, '| Duration:' , exam.duration, " , Good luck!")
         correct_answers = 0
@@ -58,13 +63,13 @@ class Student(User):
                 correct_answers += question.points
         final_score = correct_answers / total_points
         self.taken_exams[exam] = final_score
-        print('Your final score is:', final_score)
+        print('Your final score is:', self.format_score(final_score))
 
 
     def view_results(self):
         for exam in self.taken_exams:
             print(exam.title,
-                  '| Score:', self.taken_exams[exam])
+                  '| Score:', self.format_score(self.taken_exams[exam]))
 
 class Exam:
     def __init__(self, title, description, duration):
