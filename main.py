@@ -118,6 +118,9 @@ class MCQ(Question):
         for i in range(len(self.options)):
             print(i + 1, ": ", self.options[i])
 
+    def add_option(self, option):
+        self.options.append(option)
+
     def check_answer(self, user_choice):
         user_choice = int(user_choice)
         return user_choice == self.correct_option
@@ -155,3 +158,31 @@ Admins.append(Admin('Mahdiar', 'Mahdiar@qut.ac.ir'))
 Students.append(Student('Doctor', 'Doctor@anime.net'))
 Students.append(Student('Arman', 'Arman@sut.ac.ir'))
 Students.append(Student('Mehrsa', 'Mehrsa@disneyland.com'))
+Admins[0].create_exam('GoodBye 2025', 'great year', 12)
+Q = MCQ('English or Spanish?', 1000)
+Q.add_option('English')
+Q.add_option('Spanish')
+Q.add_option('Persian')
+Q.add_option('Turkish')
+Q.correct_option = 3
+Admins[0].created_exams[0].add_question(Q)
+
+Admins[0].create_exam('Hello 2026', 'happy new year', 356)
+Q = TFQ('is Html a programming language?', 20)
+Q.set_correct_answer(False)
+Admins[0].created_exams[1].add_question(Q)
+
+Admins[1].create_exam('3D printer', 'How to not make a 3D printer', 10000)
+Q = MCQ('How to make a 3d printer?', 100)
+Q.add_option('Build a MVP')
+Q.add_option('Build a Spaceship')
+Q.add_option('Scam people to buy something you cant build')
+Q.add_option('Scam companies to buy something you cant build')
+Q.correct_option = 1
+Admins[1].created_exams[0].add_question(Q)
+
+Admins[1].create_exam('Romeo and Juliet', 'to be or not to be, oh wait...', 69)
+Q = TFQ('are getting weak brother?', 85)
+Q.set_correct_answer(False)
+Admins[1].created_exams[1].add_question(Q)
+
