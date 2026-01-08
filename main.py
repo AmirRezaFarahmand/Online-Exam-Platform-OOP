@@ -35,16 +35,36 @@ class Admin(User):
 class Student(User):
     def __init__(self, name, email):
         super().__init__(name, email)
-        self.taken_exams = []
+        self.taken_exams = {}
 
     def list_available_exams(self, all_exams):
-        pass
+        for exam in all_exams:
+            if exam.is_published():
+                print(exam.title,
+                      ' | Desc: ', exam.description,
+                      ' | Duration: ', exam.duration,
+                      ' | Questions: ', len(exam.questions),
+                      ' | Score: ', self.taken_exams[exam] if exam in self.taken_exams else 'Not taken' )
 
     def take_exam(self, exam):
-        pass
+        print(exam.title, ' | Duration: ' , exam.duration, " , Good luck!")
+        correct_answers = 0
+        total_points = 0
+        for question in exam.questions:
+            question.display()
+            student_answer = input('Answer: ')
+            total_points += question.points
+            if question.check_answer(student_answer):
+                correct_answers += question.points
+        final_score = correct_answers / total_points
+        self.taken_exams[exam] = final_score
+        print('Your final score is: ', final_score)
+
 
     def view_results(self):
-        pass
+        for exam, score in self.taken_exams:
+            print(exam.title,
+                  ' | Score: ', score)
 
 class Exam:
     def __init__(self, title, description, duration):
