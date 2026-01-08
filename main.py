@@ -101,22 +101,16 @@ class TFQ(Question):
     def display(self):
         print(self.question_text, " (True/False)")
 
+    def to_bool(self, answer):
+        if answer == "T" or answer == "t" \
+                or answer == "true" or answer == "True" \
+                or int(answer) == 1:
+            return True
+        return False
+
     def check_answer(self, user_answer):
-        if user_answer == "T" or user_answer == "t" \
-            or user_answer == "true" or user_answer == "True" \
-            or int(user_answer) == 1:
-            user_answer = True
-        else:
-            user_answer = False
-        return user_answer == self.correct_answer
+        return self.to_bool(user_answer) == self.correct_answer
 
     def set_correct_answer(self, correct_answer):
-        if correct_answer == "T" or correct_answer == "t" \
-                or correct_answer == "true" or correct_answer == "True" \
-                or int(correct_answer) == 1:
-            correct_answer = True
-        else:
-            correct_answer = False
-        self.correct_answer = correct_answer
+        self.correct_answer = self.to_bool(correct_answer)
 
-    
