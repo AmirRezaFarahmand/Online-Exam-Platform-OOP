@@ -30,7 +30,7 @@ class Admin(User):
                   ' | Desc: ', exam.description,
                   ' | Duration: ', exam.duration,
                   ' | Questions: ', len(exam.questions),
-                  ' | Published: ', 'Yes' if exam.is_published() else 'No' )
+                  ' | Published: ', 'Yes' if exam.is_published else 'No' )
 
 class Student(User):
     def __init__(self, name, email):
@@ -142,3 +142,12 @@ class TFQ(Question):
     def set_correct_answer(self, correct_answer):
         self.correct_answer = self.to_bool(correct_answer)
 
+admin = Admin('Mahdiar', 'mahdiar@qut.ac.ir')
+exam1 = admin.create_exam('Goodbye 2025', 'Nahuy', 20)
+q1 = TFQ('نارنگی میقولی؟', 69)
+q1.set_correct_answer(True)
+q2 = TFQ('نارنگی نمیقولی؟', 85)
+q2.set_correct_answer(False)
+admin.add_question(exam1, q1)
+admin.add_question(exam1, q2)
+admin.list_exams()
