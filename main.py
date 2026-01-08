@@ -79,4 +79,22 @@ class MCQ(Question):
     def check_answer(self, user_choice):
         user_choice = int(user_choice)
         return user_choice == self.correct_option
+
+class TFQ(Question):
+    def __init__(self, question_text, points):
+        super().__init__(question_text, points)
+        self.correct_answer = False
+
+    def display(self):
+        print(self.question_text, " (True/False)")
+
+    def check_answer(self, user_answer):
+        if user_answer == "T" or user_answer == "t" \
+            or user_answer == "true" or user_answer == "True" \
+            or int(user_answer) == 1:
+            user_answer = True
+        else:
+            user_answer = False
+        return user_answer == self.correct_answer
+
     
