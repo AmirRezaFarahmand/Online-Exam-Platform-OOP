@@ -23,3 +23,17 @@ class Admin(User):
 
     def list_exams(self):
         pass
+
+class Student(User):
+    def __init__(self, name, email):
+        super().__init__(name, email)
+        self.taken_exams = []
+
+    def list_available_exams(self):
+        pass
+
+    def take_exam(self, exam):
+        pass
+
+    def view_results(self):
+        pass
