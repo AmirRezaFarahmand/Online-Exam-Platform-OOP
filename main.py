@@ -79,10 +79,10 @@ class Exam:
         self.exam_id = last_exam_id + 1
 
     def add_question(self, question):
-        pass
+        self.questions.append(question)
 
     def conduct_exam(self, student):
-        pass
+        student.take_exam(self)
 
     def change_published_status(self, status):
         self.is_published = status
