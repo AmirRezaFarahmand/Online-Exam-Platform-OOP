@@ -65,3 +65,18 @@ class Question:
     def check_answer(self, user_answer):
         print(user_answer == self.question_text)
 
+class MCQ(Question):
+    def __init__(self, question_text, points):
+        super().__init__(question_text, points)
+        self.options = []
+        self.correct_option = 0
+
+    def display(self):
+        print(self.question_text)
+        for i in range(len(self.options)):
+            print(i + 1, ": ", self.options[i])
+
+    def check_answer(self, user_choice):
+        user_choice = int(user_choice)
+        return user_choice == self.correct_option
+    
