@@ -53,3 +53,15 @@ class Exam:
     def conduct_exam(self, student):
         pass
 
+class Question:
+    def __init__(self, question_text, points):
+        self.question_id = 0
+        self.question_text = question_text
+        self.points = points
+
+    def display(self):
+        print(self.question_text)
+
+    def check_answer(self, user_answer):
+        print(user_answer == self.question_text)
+
